@@ -420,7 +420,7 @@ namespace Game.Scripts.Tracks
                 Vector3 pos;
                 Quaternion rot;
                 
-                float powerupChance = Mathf.Clamp01(Mathf.Floor(_timeSincePowerup) * 0.5f * 0.001f);
+                float powerupChance = Mathf.Clamp01(Mathf.Floor(_timeSincePowerup) * 0.5f * 0.05f);
                 segment.GetPointAtInWorldUnit(currentWorldPos, out pos, out rot);
 
                 bool laneValid = true;

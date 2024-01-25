@@ -45,6 +45,14 @@ MonoBehaviour:
     m_Address: Invincibilty
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: 3c9a9c90c246b8c4ca501decb1f48144
+    m_Address: SpeedDown
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 87becb1478b0df8449d6099f635642c9
+    m_Address: SpeedUp
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 21947482b7132c84989cbf37a9d414f6, type: 2}
   m_SchemaSet:

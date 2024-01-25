@@ -68,7 +68,7 @@ namespace Game.Scripts.Character
 				controller.Coins += 1;
 				_audio.PlayOneShot(coinSound);
 			}
-			/*else if(collider.gameObject.layer == ObstacleLayerIndex)
+			else if(collider.gameObject.layer == ObstacleLayerIndex)
 			{
 				if (_invincible)
 				{
@@ -96,7 +96,7 @@ namespace Game.Scripts.Character
 				{
 					controller.UseConsumable(consumable);
 				}
-			}*/
+			}
 		}
 
 		public void SetInvincibleExplicit(bool invincible)

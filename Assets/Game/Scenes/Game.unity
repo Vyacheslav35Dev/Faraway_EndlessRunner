@@ -2093,7 +2093,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CharacterController: {fileID: 1118601618}
   minSpeed: 10
-  maxSpeed: 30
+  maxSpeed: 300
   speedStep: 4
   laneOffset: 1.5
   invincible: 0
@@ -2273,7 +2273,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1448470390}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 6.8, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

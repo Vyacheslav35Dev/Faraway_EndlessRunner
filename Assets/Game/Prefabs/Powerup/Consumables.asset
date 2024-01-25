@@ -14,3 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   consumbales:
   - {fileID: 114000010511232114, guid: 527cd33d94f565c428b85a011d736c3c, type: 3}
+  - {fileID: -220762774329436367, guid: 3c9a9c90c246b8c4ca501decb1f48144, type: 3}
+  - {fileID: 4879506735877668333, guid: 87becb1478b0df8449d6099f635642c9, type: 3}
