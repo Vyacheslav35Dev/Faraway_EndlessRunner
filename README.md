@@ -27,3 +27,7 @@ release in YandexGames alpha - https://yandex.ru/games/app/275351?lang=ru.
 Параметры и логика поля - TrackManager.
 
 Кривизна мира написана шейдером.
+
+Видео:
+
+https://drive.google.com/file/d/1hapPQgp7rfqI3Lan6Ib5ccSUzVPJCkXC/view?usp=sharing
