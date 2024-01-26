@@ -42,6 +42,5 @@ public class Invincibility : Consumable
     {
         base.Ended(controller);
         controller.characterCollider.SetInvincibleExplicit(false);
-        controller.RemoveActiveConsumable(this);
     }
 }

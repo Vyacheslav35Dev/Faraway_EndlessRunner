@@ -47,7 +47,9 @@ namespace Game.Scripts.Character
 		private Vector3 _targetPosition = Vector3.zero;
 		private Vector3 _startingPosition = Vector3.forward * 2f;
 
-		[SerializeField] private GameObject _invincibilityView;
+		[SerializeField] private GameObject _invincibilityIcon;
+		[SerializeField] private GameObject _speedUpIcon;
+		[SerializeField] private GameObject _speedDownIcon;
 
 		[Header("Infra")]
 		public TrackManager trackManager;
@@ -264,11 +266,6 @@ namespace Game.Scripts.Character
 			consumable.Started(this);
 		}
 
-		public void RemoveActiveConsumable(Consumable.Consumable item)
-		{
-			_activeConsumables.Remove(item.GetConsumableType());
-		}
-		
 		public void CleanConsumable()
 		{
 			foreach (var consumable in _activeConsumables.Values)
@@ -285,10 +282,20 @@ namespace Game.Scripts.Character
 			await InvincibleTimer(timer);
 		}
 		
+		public async UniTask SetSpeedUp(float timer, int value)
+		{
+			await SpeedUpTimer(timer, value);
+		}
+		
+		public async UniTask SetSpedDown(float timer, int value)
+		{
+			await SpeedDownTimer(timer, value);
+		}
+		
 		private async UniTask InvincibleTimer(float timer)
 		{
 			characterCollider.SetInvincibleExplicit(true);
-			_invincibilityView.SetActive(true);
+			_invincibilityIcon.SetActive(true);
 
 			float time = 0;
 			while(time < timer)
@@ -297,9 +304,44 @@ namespace Game.Scripts.Character
 				time += Time.deltaTime;
 			}
 			
-			_invincibilityView.SetActive(false);
+			_invincibilityIcon.SetActive(false);
 			characterCollider.SetInvincibleExplicit(false);
 			_activeConsumables.Remove(ConsumableType.INVINCIBILITY);
+		}
+		
+		private async UniTask SpeedUpTimer(float timer, int value)
+		{
+			_speedUpIcon.SetActive(true);
+
+			trackManager.SetSpeedModify(value);
+
+			float time = 0;
+			while(time < timer)
+			{
+				await UniTask.Yield();
+				time += Time.deltaTime;
+			}
+			
+			trackManager.SetSpeedModify(-value);
+			_speedUpIcon.SetActive(false);
+			_activeConsumables.Remove(ConsumableType.SPEED_UP);
+		}
+		
+		private async UniTask SpeedDownTimer(float timer, int value)
+		{
+			_speedDownIcon.SetActive(true);
+			trackManager.SetSpeedModify(-value);
+
+			float time = 0;
+			while(time < timer)
+			{
+				await UniTask.Yield();
+				time += Time.deltaTime;
+			}
+			
+			_speedDownIcon.SetActive(false);
+			trackManager.SetSpeedModify(+value);
+			_activeConsumables.Remove(ConsumableType.SPEED_DOWN);
 		}
 	}
 }

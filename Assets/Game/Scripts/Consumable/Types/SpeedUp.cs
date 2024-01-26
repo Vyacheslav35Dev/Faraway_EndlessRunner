@@ -6,6 +6,7 @@ using CharacterController = Game.Scripts.Character.CharacterController;
 
 public class SpeedUp : Consumable
 {
+    public int Value;
     public override string GetConsumableName()
     {
         return "SpeedUp";
@@ -29,18 +30,16 @@ public class SpeedUp : Consumable
 	public override void Tick(CharacterController controller)
     {
         base.Tick(controller);
-        Debug.Log("SpeedUp::Tick");
     }
 
     public override void Started(CharacterController controller)
     {
         base.Started(controller);
-        Debug.Log("SpeedUp::Started");
+        controller.SetSpeedUp(duration, Value).Forget();
     }
 
     public override void Ended(CharacterController controller)
     {
         base.Ended(controller);
-        Debug.Log("SpeedUp::Ended");
     }
 }

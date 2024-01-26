@@ -23,16 +23,15 @@ namespace Game.Scripts.Tracks
         private const float k_Acceleration = 0.2f;
         
         public static int s_StartHash = Animator.StringToHash("Start");
-
-        public delegate int MultiplierModifier(int current);
-        public MultiplierModifier modifyMultiply;
-
+        
         [Header("Character & Movements")]
         public CharacterController CharacterController;
         public float minSpeed = 5.0f;
         public float maxSpeed = 10.0f;
         public int speedStep = 4;
         public float laneOffset = 1.0f;
+
+        public float CurrentSpeed = 0;
 
         public bool invincible = false;
 
@@ -151,6 +150,7 @@ namespace Game.Scripts.Tracks
             CharacterController.Begin();
             await WaitToStart();
             IsLoaded = true;
+            StartMove();
         }
         
         async UniTask WaitToStart()
@@ -158,7 +158,6 @@ namespace Game.Scripts.Tracks
             CharacterController.character.animator.Play(s_StartHash);
             CharacterController.StartRunning();
             await UniTask.Delay(1000);
-            StartMove();
         }
 
         public void End()
@@ -194,8 +193,7 @@ namespace Game.Scripts.Tracks
                 Destroy(parallaxRoot.GetChild(i).gameObject);
             }
         }
-
-
+        
         private int _parallaxRootChildren = 0;
         private int _spawnedSegments = 0;
         void Update()
@@ -236,6 +234,7 @@ namespace Game.Scripts.Tracks
                 return;
 
             float scaledSpeed = _speed * Time.deltaTime;
+            
             _scoreAccum += scaledSpeed;
             _currentZoneDistance += scaledSpeed;
 
@@ -259,15 +258,14 @@ namespace Game.Scripts.Tracks
 
             Vector3 currentPos;
             Quaternion currentRot;
-            Transform characterTransform = CharacterController.transform;
-
+            
             _segments[0].GetPointAtInWorldUnit(_currentSegmentDistance, out currentPos, out currentRot);
             
             bool needRecenter = currentPos.sqrMagnitude > k_FloatingOriginThreshold;
 
             if (parallaxRoot != null)
             {
-                Vector3 difference = (currentPos - characterTransform.position) * parallaxRatio; ;
+                Vector3 difference = (currentPos - CharacterController.transform.position) * parallaxRatio; ;
                 int count = parallaxRoot.childCount;
                 for (int i = 0; i < count; i++)
                 {
@@ -293,8 +291,8 @@ namespace Game.Scripts.Tracks
                 _segments[0].GetPointAtInWorldUnit(_currentSegmentDistance, out currentPos, out currentRot);
             }
 
-            characterTransform.rotation = currentRot;
-            characterTransform.position = currentPos;
+            CharacterController.transform.rotation = currentRot;
+            CharacterController.transform.position = currentPos;
 
             if (parallaxRoot != null && _currentTheme.cloudPrefabs.Length > 0)
             {
@@ -321,18 +319,12 @@ namespace Game.Scripts.Tracks
             }
 
             PowerupSpawnUpdate();
-            
-            _multiplier = 1 + Mathf.FloorToInt((_speed - minSpeed) / (maxSpeed - minSpeed) * speedStep);
-
-            if (modifyMultiply != null)
-            {
-                foreach (MultiplierModifier part in modifyMultiply.GetInvocationList())
-                {
-                    _multiplier = part(_multiplier);
-                }
-            }
-
             MusicPlayer.instance.UpdateVolumes(SpeedRatio);
+        }
+
+        public void SetSpeedModify(int value)
+        {
+            _speed += value;
         }
 
         private void PowerupSpawnUpdate()

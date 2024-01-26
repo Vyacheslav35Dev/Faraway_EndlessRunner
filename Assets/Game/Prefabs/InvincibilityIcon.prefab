@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1199223177055129091}
   m_Layer: 0
-  m_Name: Invincibility
+  m_Name: InvincibilityIcon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

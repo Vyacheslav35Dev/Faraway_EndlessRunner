@@ -70,7 +70,7 @@ namespace Game.Scripts.Character
 			}
 			else if(collider.gameObject.layer == ObstacleLayerIndex)
 			{
-				if (_invincible)
+				/*if (_invincible)
 				{
 					return;
 				}
@@ -87,7 +87,7 @@ namespace Game.Scripts.Character
 				{
 					controller.StopMoving(true);
 					_audio.PlayOneShot(controller.character.deathSound);
-				}
+				}*/
 			}
 			else if(collider.gameObject.layer == PowerupLayerIndex)
 			{

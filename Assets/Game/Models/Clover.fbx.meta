@@ -8,7 +8,7 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Clover
-    second: {fileID: 3120339773352469473, guid: 09db085a7c1046146bc5c3377e1c2f07, type: 3}
+    second: {fileID: 2100000, guid: 94233922cd5e5d844af6aa3e15f3e9de, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
